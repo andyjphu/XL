@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        background: #000;
+      }
+
+      body {
+        width: 280px;
+        color: #e7e9ea;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      .header {
+        padding: 16px;
+        border-bottom: 1px solid #2f3336;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header h1 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .status {
+        font-size: 13px;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-weight: 700;
+      }
+
+      .status.active {
+        background: #00ba7c;
+        color: #fff;
+      }
+
+      .status.inactive {
+        background: #2f3336;
+        color: #71767b;
+      }
+
+      .section {
+        padding: 16px;
+        border-bottom: 1px solid #2f3336;
+      }
+
+      .section:last-child {
+        border-bottom: none;
+      }
+
+      .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #e7e9ea;
+        margin-bottom: 4px;
+      }
+
+      .section-description {
+        font-size: 13px;
+        color: #71767b;
+        margin-bottom: 16px;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      .radio-option {
+        padding: 6px 16px;
+        border-radius: 9999px;
+        border: 1px solid #536471;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: transparent;
+        color: #e7e9ea;
+      }
+
+      .radio-option:hover {
+        background: rgba(239, 243, 244, 0.1);
+      }
+
+      .radio-option.selected {
+        background: #1d9bf0;
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .radio-option.selected:hover {
+        background: #1a8cd8;
+      }
+
+      .disabled-section {
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border-radius: 9999px;
+        border: 1px solid #536471;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: transparent;
+        color: #e7e9ea;
+      }
+
+      .btn:hover {
+        background: rgba(239, 243, 244, 0.1);
+      }
+
+      .section-hint {
+        font-size: 12px;
+        color: #536471;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>XL</h1>
+      <span id="status" class="status">...</span>
+    </div>
+
+    <div id="settings">
+      <div class="section">
+        <div class="section-title">Ad Posts</div>
+        <div class="section-description">Control how ads appear in your feed</div>
+        <div class="radio-group" id="ad-mode">
+          <button class="radio-option" data-value="show">Show</button>
+          <button class="radio-option" data-value="dim">Dim</button>
+          <button class="radio-option" data-value="hide">Hide</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Layout</div>
+        <div class="section-description">Collapse sidebars with chevron buttons</div>
+        <div class="radio-group" id="layout-mode">
+          <button class="radio-option" data-value="on">On</button>
+          <button class="radio-option" data-value="off">Off</button>
+        </div>
+        <div class="section-hint" id="layout-hint">Click chevrons to collapse sidebars.</div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

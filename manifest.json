@@ -1,0 +1,16 @@
+{
+  "name": "XL",
+  "description": "Extended experience for X.com",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["tabs", "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://x.com/*", "*://*.x.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
