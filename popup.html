@@ -128,6 +128,73 @@
         color: #536471;
         margin-top: 12px;
       }
+
+      .toggle-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .toggle-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .toggle-label {
+        font-size: 14px;
+        color: #e7e9ea;
+      }
+
+      .radio-group.wrap {
+        flex-wrap: wrap;
+      }
+
+      .custom-input-row {
+        display: none;
+        margin-top: 12px;
+      }
+
+      .custom-input-row.show {
+        display: flex;
+        gap: 8px;
+      }
+
+      .custom-input {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #536471;
+        background: transparent;
+        color: #e7e9ea;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .custom-input:focus {
+        border-color: #1d9bf0;
+      }
+
+      .custom-input::placeholder {
+        color: #71767b;
+      }
+
+      .btn-apply {
+        padding: 8px 16px;
+        border-radius: 9999px;
+        border: none;
+        background: #1d9bf0;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      .btn-apply:hover {
+        background: #1a8cd8;
+      }
     </style>
   </head>
   <body>
@@ -149,12 +216,46 @@
 
       <div class="section">
         <div class="section-title">Layout</div>
-        <div class="section-description">Collapse sidebars with chevron buttons</div>
-        <div class="radio-group" id="layout-mode">
-          <button class="radio-option" data-value="on">On</button>
-          <button class="radio-option" data-value="off">Off</button>
+        <div class="section-description">Toggle sidebar visibility</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Navigation</span>
+          <div class="radio-group" id="hide-nav">
+            <button class="radio-option" data-value="show">Show</button>
+            <button class="radio-option" data-value="hide">Hide</button>
+          </div>
         </div>
-        <div class="section-hint" id="layout-hint">Click chevrons to collapse sidebars.</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Sidebar</span>
+          <div class="radio-group" id="hide-sidebar">
+            <button class="radio-option" data-value="show">Show</button>
+            <button class="radio-option" data-value="hide">Hide</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Feed Width</div>
+        <div class="section-description">Set width of the primary column</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Property</span>
+          <div class="radio-group" id="width-property">
+            <button class="radio-option" data-value="min-width">Min</button>
+            <button class="radio-option" data-value="max-width">Max</button>
+          </div>
+        </div>
+        <div class="toggle-row">
+          <span class="toggle-label">Value</span>
+          <div class="radio-group" id="feed-width">
+            <button class="radio-option" data-value="600px">600px</button>
+            <button class="radio-option" data-value="100%">100%</button>
+            <button class="radio-option" data-value="70%">70%</button>
+            <button class="radio-option" data-value="custom">Custom</button>
+          </div>
+        </div>
+        <div class="custom-input-row" id="custom-width-row">
+          <input type="text" class="custom-input" id="custom-width-input" placeholder="e.g. 800px, 50vw, 80%">
+          <button class="btn-apply" id="apply-custom-width">Apply</button>
+        </div>
       </div>
     </div>
 

@@ -30,9 +30,10 @@ After modifying files, click the refresh icon on the extension card at `chrome:/
 
 Settings are persisted via `chrome.storage.sync`. The popup sends messages to the content script when settings change for immediate effect.
 
-### Content Script
-
-Uses a `WeakSet` to track processed ad spans and a `Set` to store ad container references. This avoids reprocessing and allows instant mode switching without page refresh.
+### Target Elements
+- **Left sidebar (nav)**: `header[role="banner"]`
+- **Primary column**: `[data-testid="primaryColumn"]`
+- **Right sidebar**: `[data-testid="sidebarColumn"]`
 
 ## Design System
 
@@ -57,13 +58,11 @@ Popup follows X.com's visual language:
 - Button padding: `6px 16px`
 
 ### Components
-- Container border-radius: 16px
 - Pills/buttons: `border-radius: 9999px`
 - Selected buttons use `#1d9bf0` fill with white text
 - Unselected buttons are transparent with `#536471` border
-
-### Popup Quirks
-- Set `html { background: transparent }` to avoid corner clipping issues in Chrome extension popups
+- Toggle rows: label on left, radio group on right
+- Custom input: `border-radius: 8px`, shows Apply button
 
 ## Features
 
@@ -75,62 +74,19 @@ Modes:
 - **Dim** - 50% opacity
 - **Hide** - display: none
 
-### Layout Controls
+### Layout
+Toggle visibility of sidebars via popup controls.
 
-Resizable dividers and collapsible panels for X.com's three-column layout.
+- **Navigation**: Show/Hide - toggles `xl-hidden` class on `header[role="banner"]`
+- **Sidebar**: Show/Hide - toggles `xl-hidden` class on `[data-testid="sidebarColumn"]`
 
-#### Target Elements
-- **Left sidebar (nav)**: `header[role="banner"]`
-- **Primary column**: `[data-testid="primaryColumn"]`
-- **Right sidebar**: `[data-testid="sidebarColumn"]`
+### Feed Width
+Sets width constraint on the primary column.
 
-#### Resizable Dividers
-Draggable resize handles between:
-- Left sidebar ↔ Primary column
-- Primary column ↔ Right sidebar
+**Property**: Choose between `min-width` (default) or `max-width`
 
-Behavior:
-- Cursor: `col-resize` on hover
-- Highlight on hover: `rgba(29, 155, 240, 0.3)`
-- Persist widths to `localStorage`
-- Minimum width for primary column: 400px
-
-#### Collapsible Panels
-
-**Chevron Buttons** (IDE-style collapse toggles):
-- Position: Fixed vertically centered on the divider line, like VS Code panel collapse buttons
-- Shape: Small circular button
-- Style: `background: #16181c`, `border: 1px solid #2f3336`
-- Icon color: `#71767b`, hover: `#1d9bf0`
-
-**Primary Column** (left edge):
-- Chevron at right edge of left sidebar / left edge of primary column
-- Points left `◀` when left sidebar expanded, right `▶` when collapsed
-- Collapses left sidebar (nav icons only or fully hidden)
-
-**Right Sidebar** (left edge):
-- Chevron at left edge of right sidebar
-- Points right `▶` when expanded, left `◀` when collapsed
-- Collapses sidebar entirely
-
-#### Animation
-- Collapse/expand: `200ms ease-out`
-- Resize drag: instant (no transition during drag)
-
-#### Persistence (localStorage)
-- `xl-left-sidebar-width`: number
-- `xl-right-sidebar-width`: number
-- `xl-left-sidebar-collapsed`: boolean
-- `xl-right-sidebar-collapsed`: boolean
-
-#### Implementation Notes
-- Use `MutationObserver` to re-inject controls after X.com SPA navigation
-- Handle window resize gracefully
-- Respect X.com's existing responsive breakpoints
-
-#### Visual Reference
-```
-[  Nav  |◀] [        Primary Column        ] [▶|  Sidebar  ]
-            ↑                                ↑
-      chevron + handle               chevron + handle
-```
+**Value** presets:
+- **600px** - Default X.com width
+- **100%** - Full width
+- **70%** - Percentage-based
+- **Custom** - Accepts any CSS width value (px, %, vw, vh). Enter value and click Apply or press Enter.
