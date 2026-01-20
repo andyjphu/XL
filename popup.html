@@ -13,10 +13,30 @@
       }
 
       body {
-        width: 280px;
+        width: 320px;
         color: #e7e9ea;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-size: 14px;
+      }
+
+      /* Custom scrollbar to match X.com */
+      ::-webkit-scrollbar {
+        width: 16px;
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #3e4144;
+        border: 4px solid #000;
+        border-radius: 8px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #5c5f63;
       }
 
       .header {
@@ -93,13 +113,13 @@
       }
 
       .radio-option.selected {
-        background: #1d9bf0;
-        color: #fff;
+        background: #eff3f4;
+        color: #0f1419;
         border-color: transparent;
       }
 
       .radio-option.selected:hover {
-        background: #1a8cd8;
+        background: #d7dbdc;
       }
 
       .disabled-section {
@@ -159,12 +179,39 @@
         gap: 8px;
       }
 
+      .width-input-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .width-input {
+        width: 80px;
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 1px solid #2f3336;
+        background: #000;
+        color: #e7e9ea;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .width-input:focus {
+        border-color: #1d9bf0;
+      }
+
+      .width-input::placeholder {
+        color: #71767b;
+      }
+
       .custom-input {
         flex: 1;
         padding: 8px 12px;
-        border-radius: 8px;
-        border: 1px solid #536471;
-        background: transparent;
+        border-radius: 4px;
+        border: 1px solid #2f3336;
+        background: #000;
         color: #e7e9ea;
         font-size: 14px;
         font-family: inherit;
@@ -181,19 +228,50 @@
       }
 
       .btn-apply {
-        padding: 8px 16px;
+        padding: 6px 12px;
         border-radius: 9999px;
         border: none;
-        background: #1d9bf0;
-        color: #fff;
-        font-size: 14px;
+        background: #eff3f4;
+        color: #0f1419;
+        font-size: 13px;
         font-weight: 700;
         cursor: pointer;
         transition: background 0.15s ease;
       }
 
       .btn-apply:hover {
-        background: #1a8cd8;
+        background: #d7dbdc;
+      }
+
+      .api-key-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .api-key-input {
+        flex: 1;
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 1px solid #2f3336;
+        background: #000;
+        color: #e7e9ea;
+        font-size: 13px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .api-key-input:focus {
+        border-color: #1d9bf0;
+      }
+
+      .api-key-input::placeholder {
+        color: #71767b;
+      }
+
+      .scoring-error {
+        color: #f4212e;
       }
     </style>
   </head>
@@ -245,17 +323,41 @@
         </div>
         <div class="toggle-row">
           <span class="toggle-label">Value</span>
-          <div class="radio-group" id="feed-width">
-            <button class="radio-option" data-value="600px">600px</button>
-            <button class="radio-option" data-value="100%">100%</button>
-            <button class="radio-option" data-value="70%">70%</button>
-            <button class="radio-option" data-value="custom">Custom</button>
+          <div class="width-input-row">
+            <input type="text" class="width-input" id="feed-width-input" placeholder="600px">
+            <button class="btn-apply" id="apply-feed-width">Apply</button>
           </div>
         </div>
-        <div class="custom-input-row" id="custom-width-row">
-          <input type="text" class="custom-input" id="custom-width-input" placeholder="e.g. 800px, 50vw, 80%">
-          <button class="btn-apply" id="apply-custom-width">Apply</button>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Quick Actions</div>
+        <div class="section-description">Add shortcut buttons to posts</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Not Interested</span>
+          <div class="radio-group" id="show-not-interested">
+            <button class="radio-option" data-value="show">Show</button>
+            <button class="radio-option" data-value="hide">Hide</button>
+          </div>
         </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Post Scoring</div>
+        <div class="section-description">Rate posts using Cerebras AI (1-3)</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Scoring</span>
+          <div class="radio-group" id="scoring-enabled">
+            <button class="radio-option" data-value="on">On</button>
+            <button class="radio-option" data-value="off">Off</button>
+          </div>
+        </div>
+        <div class="api-key-row">
+          <input type="password" class="api-key-input" id="cerebras-api-key" placeholder="Cerebras API key">
+          <button class="btn-apply" id="save-api-key">Save</button>
+        </div>
+        <div class="section-hint" id="api-key-status"></div>
+        <div class="section-hint scoring-error" id="scoring-status"></div>
       </div>
     </div>
 

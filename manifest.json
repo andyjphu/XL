@@ -4,6 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["tabs", "storage"],
+  "host_permissions": ["https://api.cerebras.ai/*"],
   "action": {
     "default_popup": "popup.html"
   },
@@ -11,6 +12,12 @@
     {
       "matches": ["*://x.com/*", "*://*.x.com/*"],
       "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["prompt.json"],
+      "matches": ["*://x.com/*", "*://*.x.com/*"]
     }
   ]
 }
